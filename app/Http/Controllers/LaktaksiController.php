@@ -30,7 +30,7 @@ class LaktaksiController extends Controller
     public function index()
     {
         $array = [
-            'title' => 'Aula',
+            'title' => 'Laktaktsi',
             'waktus' => MasterWaktuBooking::where('id','<>',0)->get()->pluck('waktu','waktu'),
             'status' => MasterStatus::where('id','<>',0)->get()->pluck('status_name','status_id'),
             'users' => User::where('id','<>',0)->get()
@@ -49,7 +49,7 @@ class LaktaksiController extends Controller
             'title' => 'Create Booking Laktasi',
             'waktus' => MasterWaktuBooking::where('id','<>',0)->get()->pluck('waktu','waktu')
         ];
-        return view('pages.laktasi.create_or_update',$array);
+        return view('pages.laktaksi.create_or_update',$array);
     }
 
     /**
@@ -106,7 +106,7 @@ class LaktaksiController extends Controller
             if($checkEvent !=null ){
                 return response()->json([
                     'status' => 'fail',
-                    'messages' => 'Waktu booking sudah terisi, please pilih waktu yang lain.'
+                    'messages' => 'Waktu booking sudah terisi, silakan pilih waktu yang lain.'
                 ],422);
             }
         } else {
@@ -122,7 +122,7 @@ class LaktaksiController extends Controller
             if($checkEvent != null || $checkEventAdmin != null ){
                 return response()->json([
                     'status' => 'fail',
-                    'messages' => 'Waktu booking sudah terisi, please pilih waktu yang lain.'
+                    'messages' => 'Waktu booking sudah terisi, silakan pilih waktu yang lain.'
                 ],422);
             }
         }
@@ -155,6 +155,7 @@ class LaktaksiController extends Controller
                 'waktu_booking' => $req['waktu_booking'],
                 'tanggal_pemesanan' => $req['tanggal_pemesanan'],
                 'status' => 1,
+                'hari' => '-',
                 'type_booking' => $req['type_booking'],
                 'lama_booking' => $lama_booking,
                 'lama_booking_date' => $date_booking ?? null,
@@ -252,7 +253,6 @@ class LaktaksiController extends Controller
     public function uploadFile(Request $request, $id){
         $req = $request->all();
         $check = FileLaktasi::where('laktasi_id', $id)->first();
-
         if(empty($check)) {
             $msg = [
                 'file_laktasi.max' => 'File max 25mb.',

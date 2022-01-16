@@ -34,6 +34,7 @@ Route::group(['prefix' => 'tugas'],function(){
 Route::get('/','DashboardController@index')->name('home');
 Route::post('/','DashboardController@index')->name('home.store');
 Route::get('/all-bookings','DashboardController@showAllPageBooking')->name('all-bookings.pages');
+Route::get('/dataTables','DashboardController@dataTables')->name('home.dataTables');
 
 Auth::routes();
 

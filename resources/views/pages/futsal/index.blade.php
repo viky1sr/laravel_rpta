@@ -145,12 +145,35 @@
                 // begin first table
                 var table = $('#dataTable').DataTable({
                     responsive: true,
-                    // Pagination settings
-                    dom: `<'row'<'col-sm-12'tr>>
+                    dom: `<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>
+			<'row'<'col-sm-12'tr>>
 			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
-                    // read more: https://datatables.net/examples/basic_init/dom.html
 
-                    lengthMenu: [5, 10, 25, 50],
+                    buttons: [
+                        {
+                            extend: 'print',
+                            title: 'Reporting Booking Lapangan Futsal',
+                            exportOptions: {
+                                columns: [ 0,1,2,3,4,5]
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            title: 'Reporting Booking Lapangan Futsal',
+                            exportOptions: {
+                                columns: [ 0,1,2,3,4,5]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            title: 'Reporting Booking Lapangan Futsal',
+                            exportOptions: {
+                                columns: [ 0,1,2,3,4,5]
+                            }
+                        },
+                    ],
+
+                    lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
 
                     pageLength: 10,
 

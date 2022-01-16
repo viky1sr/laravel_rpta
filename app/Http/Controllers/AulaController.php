@@ -157,6 +157,7 @@ class AulaController extends Controller
                 'waktu_booking' => $req['waktu_booking'],
                 'tanggal_pemesanan' => $req['tanggal_pemesanan'],
                 'status' => 1,
+                'hari' => '-',
                 'type_booking' => $req['type_booking'],
                 'lama_booking' => $lama_booking,
                 'lama_booking_date' => $date_booking ?? null,

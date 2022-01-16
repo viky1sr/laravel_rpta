@@ -173,10 +173,10 @@
                         <!--begin::Text-->
                         <div class="d-flex flex-column flex-grow-1 mr-2">
                             <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Perpustakaan</a>
-                            <span class="text-muted font-weight-bold">Mark, Rowling, Esther</span>
+                            <span class="text-muted font-weight-bold">Total booking success</span>
                         </div>
                         <!--end::Text-->
-                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">+82$</span>
+                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">{{$count_perpustakaan}}</span>
                     </div>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -191,10 +191,10 @@
                         <!--begin::Text-->
                         <div class="d-flex flex-column flex-grow-1 mr-2">
                             <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Laktaksi</a>
-                            <span class="text-muted font-weight-bold">Randy, Steve, Mike</span>
+                            <span class="text-muted font-weight-bold">Total booking success</span>
                         </div>
                         <!--end::Text-->
-                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">+280$</span>
+                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">{{$count_laktaksi}}</span>
                     </div>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -209,10 +209,10 @@
                         <!--begin::Text-->
                         <div class="d-flex flex-column flex-grow-1 mr-2">
                             <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Lap Futsal</a>
-                            <span class="text-muted font-weight-bold">John, Pat, Jimmy</span>
+                            <span class="text-muted font-weight-bold">Total booking success</span>
                         </div>
                         <!--end::Text-->
-                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">+4500$</span>
+                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">{{$count_futsal}}</span>
                     </div>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -227,10 +227,10 @@
                         <!--begin::Text-->
                         <div class="d-flex flex-column flex-grow-1 mr-2">
                             <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Aula</a>
-                            <span class="text-muted font-weight-bold">Sandra, Tim, Louis</span>
+                            <span class="text-muted font-weight-bold">Total booking success</span>
                         </div>
                         <!--end::Text-->
-                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">+4500$</span>
+                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">{{$count_aula}}</span>
                     </div>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -245,10 +245,10 @@
                         <!--begin::Text-->
                         <div class="d-flex flex-column flex-grow-1 mr-2">
                             <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Lap Bulu Tangkis</a>
-                            <span class="text-muted font-weight-bold">Disco, Retro, Sports</span>
+                            <span class="text-muted font-weight-bold">Total booking success</span>
                         </div>
                         <!--end::Text-->
-                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">+4500$</span>
+                        <span class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">{{$count_tangkis}}</span>
                     </div>
                     <!--end::Item-->
                 </div>
@@ -260,7 +260,7 @@
         <div class="card card-custom card-stretch gutter-b bg-light-info col-xl-8">
             <div class="card-title py-5">
                 <h3 class="card-label">
-                    <span class="d-block text-dark font-weight-bolder">List Booking {{$year_now}}</span>
+                    <span class="d-block text-dark font-weight-bolder">List Booking  {{Carbon\Carbon::now()->format('d M Y')}}</span>
                 </h3>
             </div>
 
@@ -314,32 +314,34 @@
                 <!--begin: Datatable-->
             </div>
 
-{{--            <div class="card-body">--}}
-{{--                <!--begin: Datatable-->--}}
-{{--                <table class="table table-bordered table-hover table-checkable" id="dataTable">--}}
-{{--                    <thead>--}}
-{{--                    <tr>--}}
-{{--                        <th>Nama Pemesanan</th>--}}
-{{--                        <th>Intansi</th>--}}
-{{--                        <th>Tanggal Booking</th>--}}
-{{--                        <th>Waktu Booking</th>--}}
-{{--                        <th>Kode Booking</th>--}}
-{{--                        <th>Status</th>--}}
-{{--                    </tr>--}}
-{{--                    </thead>--}}
-{{--                    <tfoot>--}}
-{{--                    <tr>--}}
-{{--                        <th>Nama Pemesanan</th>--}}
-{{--                        <th>Intansi</th>--}}
-{{--                        <th>Tanggal Booking</th>--}}
-{{--                        <th>Waktu Booking</th>--}}
-{{--                        <th>Kode Booking</th>--}}
-{{--                        <th>Status</th>--}}
-{{--                    </tr>--}}
-{{--                    </tfoot>--}}
-{{--                </table>--}}
-{{--                <!--end: Datatable-->--}}
-{{--            </div>--}}
+            <div class="card-body">
+                <!--begin: Datatable-->
+                <table class="table table-bordered table-hover table-checkable" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>Nama Pemesanan</th>
+                        <th>Intansi</th>
+                        <th>Tanggal Booking</th>
+                        <th>Waktu Booking</th>
+                        <th>Kode Booking</th>
+                        <th>Status</th>
+                        <th>Created By</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Nama Pemesanan</th>
+                        <th>Intansi</th>
+                        <th>Tanggal Booking</th>
+                        <th>Waktu Booking</th>
+                        <th>Kode Booking</th>
+                        <th>Status</th>
+                        <th>Created By</th>
+                    </tr>
+                    </tfoot>
+                </table>
+                <!--end: Datatable-->
+            </div>
         </div>
     </div>
 @endsection
@@ -376,26 +378,29 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: '/api/book/data-table',
-                        type: 'POST',
+                        url: '{{route('home.dataTables')}}',
+                        type: 'GET',
                         data: function (d) {
-                            d.intansi = $('#intansi').val();
-                            d.type_booking = $('#type_booking').val();
-                            d.name_pelaksanaan = $('#name_pelaksanaan').val();
-                            d.start_year    = $('.start_year').val();
-                            d.end_year    = $('.end_year').val();
+                            d.nama_pemesan = $('#nama_pemesan').val();
+                            d.instansi = $('#instansi').val();
+                            d.kode_booking = $('#kode_booking').val();
+                            d.status    = $('#status').val();
+                            d.no_induk    = $('#no_induk').val();
+                            d.waktu_booking_start    = $('.waktu_booking_start').val();
+                            d.waktu_booking_end    = $('.waktu_booking_end').val();
+                            d.jam_booking    = $('.jam_booking').val();
+                            d.created_by    = $('.created_by').val();
                         }
                     },
 
                     columns: [
-                        {data: 'type_booking'},
-                        {data: 'judul'},
-                        {data: 'name_pelaksanaan'},
-                        {data: 'th_terbit'},
-                        {data: 'penerbit'},
-                        {data: 'isibn'},
-                        {data: 'kategori'},
-                        {data: 'lokasi'},
+                        {data : 'nama_pemesan' , name: 'nama_pemesan'},
+                        {data : 'instansi' , name: 'instansi'},
+                        {data : 'tanggal_pemesanan' , name: 'tanggal_pemesanan'},
+                        {data : 'waktu_booking' , name: 'waktu_booking'},
+                        {data : 'kode_booking' , name: 'kode_booking'},
+                        {data : 'status_name' , name: 'status_name'},
+                        {data : 'full_name' , name: 'full_name'}
                     ],
                 });
 

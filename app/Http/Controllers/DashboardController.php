@@ -11,6 +11,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
+use Yajra\DataTables\DataTables;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -658,6 +660,12 @@ class DashboardController extends Controller
 
         $booking_now = $pr->unionAll($lk)->unionAll($al)->unionAll($bl)->unionAll($ft)->paginate(5);
 
+        $is_aula = Aula::where('status','=',3)->whereYear('created_at','=',Carbon::now())->count();
+        $is_per = Perpustakaan::where('status','=',3)->whereYear('created_at','=',Carbon::now())->count();
+        $is_futsal = Futsal::where('status','=',3)->whereYear('created_at','=',Carbon::now())->count();
+        $is_tangkis = BuluTangkis::where('status','=',3)->whereYear('created_at','=',Carbon::now())->count();
+        $is_lak = Laktasi::where('status','=',3)->whereYear('created_at','=',Carbon::now())->count();
+
         $array = [
             'year_now' => Carbon::now()->format('Y'),
             'is_label' => $request->type_tahun ?? "Bulan",
@@ -672,7 +680,12 @@ class DashboardController extends Controller
             'aula_name' => $al_name,
             'perpustakaan' => implode(",",$pr_bulan) ?? 0,
             'perpustakaan_name' => $pr_name,
-            'booking_now' => $booking_now
+            'booking_now' => $booking_now,
+            'count_laktaksi' => $is_lak,
+            'count_tangkis' => $is_tangkis,
+            'count_futsal' => $is_futsal,
+            'count_aula' => $is_aula,
+            'count_perpustakaan' => $is_per
         ];
         return view('home',$array);
     }
@@ -683,19 +696,36 @@ class DashboardController extends Controller
     }
 
     public function dataTables(Request $request){
-        $pr = Perpustakaan::whereDate('created_at','=',Carbon::now())
-            ->select('nama_pemesan','instansi');
-        $lk = Laktasi::whereDate('created_at','=',Carbon::now())
-            ->select('nama_pemesan','instansi');
-        $al = Aula::whereDate('created_at','=',Carbon::now())
-            ->select('nama_pemesan','instansi');
-        $bl = BuluTangkis::whereDate('created_at','=',Carbon::now())
-            ->select('nama_pemesan','instansi');
-        $ft = Futsal::whereDate('created_at','=',Carbon::now())
-            ->select('nama_pemesan','instansi');
-
+        $pr = Perpustakaan::whereDate('perpustakaans.created_at','=',Carbon::now())
+            ->leftJoin('master_statuses','master_statuses.status_id','=','perpustakaans.status')
+            ->leftJoin('users','users.id','=','perpustakaans.created_by')
+            ->select('perpustakaans.*','master_statuses.status_name',
+                DB::raw('CONCAT(users.first_name, \' \', users.last_name) as full_name')
+            );
+        $lk = Laktasi::whereDate('laktasis.created_at','=',Carbon::now())
+            ->leftJoin('master_statuses','master_statuses.status_id','=','laktasis.status')
+            ->leftJoin('users','users.id','=','laktasis.created_by')
+            ->select('laktasis.*','master_statuses.status_name',
+                DB::raw('CONCAT(users.first_name, \' \', users.last_name) as full_name')
+            );
+        $al = Aula::whereDate('aulas.created_at','=',Carbon::now())
+            ->leftJoin('master_statuses','master_statuses.status_id','=','aulas.status')
+            ->leftJoin('users','users.id','=','aulas.created_by')
+            ->select('aulas.*','master_statuses.status_name',
+                DB::raw('CONCAT(users.first_name, \' \', users.last_name) as full_name')
+            );
+        $bl = BuluTangkis::whereDate('bulu_tangkis.created_at','=',Carbon::now())
+            ->leftJoin('master_statuses','master_statuses.status_id','=','bulu_tangkis.status')
+            ->leftJoin('users','users.id','=','bulu_tangkis.created_by')
+            ->select('bulu_tangkis.*','master_statuses.status_name',
+                DB::raw('CONCAT(users.first_name, \' \', users.last_name) as full_name'));
+        $ft = Futsal::whereDate('futsals.created_at','=',Carbon::now())
+            ->leftJoin('master_statuses','master_statuses.status_id','=','futsals.status')
+            ->leftJoin('users','users.id','=','futsals.created_by')
+            ->select('futsals.*','master_statuses.status_name',
+                DB::raw('CONCAT(users.first_name, \' \', users.last_name) as full_name'));
         $booking_now = $pr->unionAll($lk)->unionAll($al)->unionAll($bl)->unionAll($ft);
 
-
+        return DataTables::of($booking_now)->toJson();
     }
 }

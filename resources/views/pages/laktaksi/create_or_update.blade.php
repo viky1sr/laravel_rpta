@@ -8,7 +8,7 @@
     <div class="card card-custom gutter-b example example-compact">
         <!--begin::Form-->
         @role('member')
-        <form id="aulaForm" method="post" action="{{empty($id) ? route('lataksi.store') : route('lataksi.update',$id)}}" enctype="multipart/form-data" >
+        <form id="aulaForm" method="post" action="{{empty($id) ? route('laktasi.store') : route('lataksi.update',$id)}}" enctype="multipart/form-data" >
             @endrole
             @role('admin')
             <form id="aulaForm" method="post" action="{{empty($id) ? route('lataksi.store-admin') : route('lataksi.update-admin',$id)}}" enctype="multipart/form-data" >

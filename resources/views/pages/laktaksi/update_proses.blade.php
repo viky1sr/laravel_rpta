@@ -8,11 +8,11 @@
     <div class="card card-custom gutter-b example example-compact">
         <!--begin::Form-->
 
-        @role('admin')
+{{--        @role('admin')--}}
         <div class="card-body updateHidden">
             <button class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#updateStatus">Update Status</button>
         </div>
-        @endrole
+{{--        @endrole--}}
         <br>
 
         @if(Auth::user()->hasRole('member') && $data->status == 1)
@@ -111,7 +111,7 @@
         @endif
         @endrole
 
-        <form id="aulaForm" method="post" action="{{ route('laktasi.upload-file',$id) }}" enctype="multipart/form-data" >
+        <form id="laktaksiForm" method="post" action="{{ route('laktasi.upload-file',$id) }}" enctype="multipart/form-data" >
             {{ csrf_field() }} {{ method_field('POST') }}
             <div class="card-body">
 
@@ -186,8 +186,8 @@
                         <div class="col-md-4 disabledTrue">
                             <div class="form-group">
                                 <label for="">File Pendukung <span class="text-danger">*</span></label>
-                                <input type="text" hidden class="form-control unable" name="aula_id" value="{{$data->id}}">
-                                <input type="file" class="form-control readOnly" name="file_aula">
+                                <input type="text" hidden class="form-control unable" name="laktasi_id" value="{{$data->id}}">
+                                <input type="file" class="form-control readOnly" name="file_laktasi">
                             </div>
                         </div>
                     @endif
@@ -226,7 +226,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateStatusLabel">Update Status aula</h5>
+                    <h5 class="modal-title" id="updateStatusLabel">Update Status Laktaksi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -379,7 +379,7 @@
         }
 
         $(document).ready(function(){
-            $('#aulaForm').on('submit', (e) => {
+            $('#laktaksiForm').on('submit', (e) => {
                 e.preventDefault();
                 $.ajaxSetup({
                     headers: {
@@ -390,7 +390,7 @@
                     type: 'POST',
                     url: $(this).attr("action"),
                     // data: $(this).find('input,select,textarea').serialize(),
-                    data: new FormData($('#aulaForm')[0]),
+                    data: new FormData($('#laktaksiForm')[0]),
                     dataType: 'json',
                     processData: false,
                     contentType: false,
@@ -465,7 +465,6 @@
         })
 
         var checkStatus = '{{$data->status ?? ""}}';
-
         if(checkStatus == 0 || checkStatus == 1 || checkStatus == 3) {
             $('.updateHidden').addClass('d-none')
             if(checkStatus == 0) {

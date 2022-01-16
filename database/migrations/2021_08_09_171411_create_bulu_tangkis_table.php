@@ -22,7 +22,7 @@ class CreateBuluTangkisTable extends Migration
             $table->string('instansi');
             $table->string('nama_pemesan');
             $table->string('no_hp')->nullable();
-            $table->string('hari');
+            $table->string('hari')->nullable();
             $table->text('tujuan_kegiatan');
             $table->string('created_by');
             $table->timestamps();

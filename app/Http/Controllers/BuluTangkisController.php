@@ -197,7 +197,7 @@ class BuluTangkisController extends Controller
             'waktus' => MasterWaktuBooking::where('id','<>',0)->get()->pluck('waktu','waktu')
         ];
 
-        return view('pages.bulutangkis.show',$array);
+        return view('pages.bulutangkis.update_proses',$array);
     }
 
     /**

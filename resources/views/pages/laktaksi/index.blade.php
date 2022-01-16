@@ -145,12 +145,34 @@
                 // begin first table
                 var table = $('#dataTable').DataTable({
                     responsive: true,
-                    // Pagination settings
-                    dom: `<'row'<'col-sm-12'tr>>
+                    dom: `<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>
+			<'row'<'col-sm-12'tr>>
 			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
-                    // read more: https://datatables.net/examples/basic_init/dom.html
 
-                    lengthMenu: [5, 10, 25, 50],
+                    buttons: [
+                        {
+                            extend: 'print',
+                            title: 'Reporting Booking Laktasi',
+                            exportOptions: {
+                                columns: [ 0,1,2,3,4,5]
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            title: 'Reporting Booking Laktasi',
+                            exportOptions: {
+                                columns: [ 0,1,2,3,4,5]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            title: 'Reporting Booking Laktasi',
+                            exportOptions: {
+                                columns: [ 0,1,2,3,4,5]
+                            }
+                        },
+                    ],
+                    lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
 
                     pageLength: 10,
 
@@ -188,7 +210,7 @@
                         {data : 'full_name' , name: 'full_name'}
                         ,@endrole
                         {data: 'id', name: 'id' , searchable: false , orderable: false ,render : function(data, type , row) {
-                                return '<a href="aula/show/'+row.id+'" title="show" ><i class="fa fa-fw fa-eye text-info"></i></a>'
+                                return '<a href="laktasi/show/'+row.id+'" title="show" ><i class="fa fa-fw fa-eye text-info"></i></a>'
                             }
                         }
                     ],

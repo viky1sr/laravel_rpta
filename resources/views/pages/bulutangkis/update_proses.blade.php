@@ -186,8 +186,8 @@
                         <div class="col-md-4 disabledTrue">
                             <div class="form-group">
                                 <label for="">File Pendukung <span class="text-danger">*</span></label>
-                                <input type="text" hidden class="form-control unable" name="aula_id" value="{{$data->id}}">
-                                <input type="file" class="form-control readOnly" name="file_aula">
+                                <input type="text" hidden class="form-control unable" name="bulu_tangkis_id" value="{{$data->id}}">
+                                <input type="file" class="form-control readOnly" name="file_bulu_tangkis">
                             </div>
                         </div>
                     @endif
