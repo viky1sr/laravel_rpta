@@ -92,7 +92,9 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2 ">Submit</button>
-                <button type="" class="btn btn-secondary ">Cancel</button>
+                <a href="{{route('bulu-tangkis.index')}}">
+                    <button type="button" class="btn btn-secondary ">Cancel</button>
+                </a>
             </div>
         </form>
         <!--end::Form-->

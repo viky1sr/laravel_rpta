@@ -92,7 +92,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2 submitBtn">Submit</button>
-                <a href="{{ route('perpustakaan.index')}}" class="btn btn-secondary backBtn">Back</a>
+                <a href="{{ route('perpustakaan.index')}}" class="btn btn-secondary backBtn">Cancel</a>
             </div>
         </form>
         <!--end::Form-->
