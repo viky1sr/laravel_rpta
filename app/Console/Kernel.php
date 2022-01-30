@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('command:daily-report')->everyFiveMinutes();
         $schedule->command('command:reject_status')->everyMinute();
+        $schedule->command('command:genetika')->everyMinute();
     }
 
     /**

@@ -40,6 +40,11 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::prefix('genetika')->group( function () {
+    Route::get('/create','GenetikaController@create')->name('genetika.create');
+    Route::post('/create','GenetikaController@store')->name('genetika.store');
+});
+
 Route::prefix('perpustakaan')->group(function () {
     Route::get('/','PerpustakaanController@index')->name('perpustakaan.index');
     Route::get('/create','PerpustakaanController@create')->name('perpustakaan.create')->middleware('role:member');
