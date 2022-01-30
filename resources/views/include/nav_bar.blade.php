@@ -126,7 +126,7 @@
                         </a>
                     </li>
 
-
+                    @role('admin')
                     <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-0 mb-3 mb-lg-0">
                         <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center {{ Route::is('genetika.create') ? 'active' : '' }}"   href="{{route('genetika.create')}}">
                                                         <span class="nav-icon py-2 w-auto">
@@ -145,6 +145,7 @@
                             <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Admin Pejadwalan</span>
                         </a>
                     </li>
+                    @endrole
                 </ul>
                 <!--end::Nav Tabs-->
                 <!--begin::Nav Content-->
