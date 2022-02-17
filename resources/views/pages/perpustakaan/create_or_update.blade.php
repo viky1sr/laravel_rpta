@@ -101,7 +101,7 @@
 
 @section('script-page')
     <script src="{{asset('assets/js/pages/crud/file-upload/image-input.js')}}"></script>
-
+{{--d--}}
     <script type="text/javascript">
         $('#typeBooking').on('change', function() {
             let idBooking = $(this).val();
